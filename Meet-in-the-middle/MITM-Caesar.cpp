@@ -1,3 +1,10 @@
+/*
+TODO:
+    1) write decrytption for caesar
+    2) write function to check class for encrypted strings for match in e and e^-1
+    3) Not necessary but sort class by string so search is faster
+*/
+
 #include <iostream>
 #include <string>
 
@@ -33,7 +40,7 @@ int main()
     {
         table[i].putEntry(knownPlainText, i);
     }
-    
+
     for(int i = 0; i < 26; i++)
     {   
         cout << i << ": ";
