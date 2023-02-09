@@ -2,7 +2,8 @@
 TODO:
     1) write decrytption for caesar
     2) write function to check class for encrypted strings for match in e and e^-1
-    3) Not necessary but sort class by string so search is faster
+    3) Make into seperate .h and .cpp files
+    4) Not necessary but sort class by string so search is faster
 */
 
 #include <iostream>
@@ -12,7 +13,8 @@ TODO:
 
 using namespace std;
 
-string caesarCipher(string plainText, int key);
+string encryptCaesarCipher(string plainText, int key);
+string decryptCaesarCipher(string cipherText, int key);
 
 class Table {
         string cipherText;
@@ -30,7 +32,7 @@ int main()
     string knownPlainText = "Hello World";
     int key1 = 4; int key2 = 13;
 
-    string cipherText = caesarCipher(knownPlainText, key1);
+    string cipherText = encryptCaesarCipher(knownPlainText, key1);
     cout << cipherText << endl;
 
     cipherText = caesarCipher(cipherText, key2);
@@ -50,7 +52,7 @@ int main()
     return 0;
 }
 
-string caesarCipher(string plainText, int key)
+string encryptCaesarCipher(string plainText, int key)
 {
 
     string result = "";
@@ -69,10 +71,17 @@ string caesarCipher(string plainText, int key)
 
 }
 
+string decryptCaesarCipher(string cipherText, int key)
+{
+
+    
+
+}
+
 void Table::putEntry(string plainText, int key)
 {
 
-    cipherText = caesarCipher(plainText, key);
+    cipherText = encryptCaesarCipher(plainText, key);
     key_l = key;
 
 }
