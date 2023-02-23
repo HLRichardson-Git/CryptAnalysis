@@ -14,59 +14,19 @@
 using namespace std;
 
 string decrypt(int key[5], string cipherText);
+void bruteforce(int key[5], int index, string cipherText, string plainText);
 
 int main()
 {
-    
-    // Debug set SHOW to true to show all rounds till solution
-    bool show = false;
-
-    // Key is among or 0 12 14 13 6 shifts repeated
-    int key[5] = {0,0,0,0,0};
+    int key[5] = {0, 0, 0, 0, 0};
     string cipherText = "ttsdaioyoxoibsuxvizvsajrxttsygzkrbm";
-    string candidate = "";
     string plainText = "thequickbrownfoxjumpsoverthelazydog";
-    int count = 0;
 
-    for(int i = 0; i < 26; i++)
-    {
-        for(int j = 0; j < 26; j++)
-        {
-            for(int k = 0; k < 26; k++)
-            {
-                for(int l = 0; l < 26; l++)
-                {
-                    for(int n = 0; n < 26; n++)
-                    {
-                        key[0] = i;
-                        key[1] = j;
-                        key[2] = k;
-                        key[3] = l;
-                        key[4] = n;
-
-                        candidate = decrypt(key, cipherText);
-
-                        if(show)
-                            cout << count << " | Key: " << key[0] << " " << key[1] << " " << key[2] << " " << key[3] << " " << key[4] << " | plaintext: " << candidate << endl;
-
-                        if(plainText.compare(candidate) == 0)
-                        {   
-                            if (!show)
-                                cout << count << " | Key: " << key[0] << " " << key[1] << " " << key[2] << " " << key[3] << " " << key[4] << " | plaintext: " << candidate << endl;
-
-                            system("pause");
-                        }
-
-                        count++;
-                    }
-                }
-            }   
-        }
-    }
-
+    bruteforce(key, 0, cipherText, plainText);
 
     return 0;
 }
+
 
 string decrypt(int key[4], string cipherText)
 {
@@ -85,4 +45,28 @@ string decrypt(int key[4], string cipherText)
     }
 
     return plainText;
+}
+
+void bruteforce(int key[5], int index, string cipherText, string plainText)
+{
+    if (index == 5)
+    {
+        string candidate = decrypt(key, cipherText);
+        if (candidate == plainText)
+        {
+            cout << "Key | ";
+            for (int i = 0; i < 5; i++)
+                cout << key[i] << " ";
+            cout << "| plaintext: " << candidate << endl;
+            return;
+        }
+    }
+    else
+    {
+        for (int i = 0; i < 26; i++)
+        {
+            key[index] = i;
+            bruteforce(key, index + 1, cipherText, plainText);
+        }
+    }
 }
