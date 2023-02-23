@@ -49,6 +49,7 @@ string decrypt(int key[4], string cipherText)
 
 void bruteforce(int key[5], int index, string cipherText, string plainText)
 {
+    // Check when key is fully initialized
     if (index == 5)
     {
         string candidate = decrypt(key, cipherText);
@@ -56,13 +57,14 @@ void bruteforce(int key[5], int index, string cipherText, string plainText)
         {
             cout << "Key | ";
             for (int i = 0; i < 5; i++)
-                cout << key[i] << " ";
-            cout << "| plaintext: " << candidate << endl;
+                cout << char(key[i] + 97);
+            cout << " | plaintext: " << candidate << endl;
             return;
         }
     }
     else
     {
+        // Recursively call bruteforce until key is initialized.
         for (int i = 0; i < 26; i++)
         {
             key[index] = i;
