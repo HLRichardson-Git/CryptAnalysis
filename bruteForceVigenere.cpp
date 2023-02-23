@@ -28,7 +28,7 @@ int main()
 }
 
 
-string decrypt(int key[4], string cipherText)
+string decrypt(int key[5], string cipherText)
 {
 
     int cipherLength = cipherText.length();
